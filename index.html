@@ -1,0 +1,77 @@
+<!-- Based on Vertical Slider by Tom English codepen.io -->
+<!doctype html>
+<html lan="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>WCSU Virtual Tours Demo Page</title>
+    <meta name="viewport" content="wide=device-width">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" type="text/css">
+    <link rel="icon" href="http://wcsu.edu/favicon.ico" type="image/ico">
+    <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <!-- For jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- For Google vrView -->
+    <script src="//storage.googleapis.com/vrview/2.0/build/vrview.min.js"></script>
+</head>
+<body>
+    <section class="wrapper">
+  <div class="container">
+    
+    <div class="slideDiv">
+      <article class="slide active">
+          <div id="vrview" class="vrView"></div>
+      </article>
+
+       <article class="slide">
+      </article>
+
+       <article class="slide">
+      </article>
+
+       <article class="slide">
+      </article>
+    </div>  <!-- /slideDiv -->
+    
+    <nav class="controls">
+      <button class="button" type="button" aria-label="Go to first image"></button>
+      <button class="button" type="button" aria-label="Go to second image"></button>
+      <button class="button" type="button" aria-label="Go to third image"></button>
+      <button class="button" type="button" aria-label="Go to fourth image"></button>
+    </nav>
+
+      
+  
+  </div>  <!-- /container -->
+</section>  <!-- /wrapper -->
+</body>
+<script>
+
+    window.addEventListener('load', onVrViewLoad)
+function onVrViewLoad() {
+  var vrView = new VRView.Player('#vrview', {
+      height: '100%',
+      width: '100%',
+      video: 'sbVideo14k.mp4'
+      //is_stereo: true
+  });
+}
+(function() {
+  var button = document.querySelectorAll('.button');
+  
+  function controls() {
+    $(this).addClass('selected').siblings('button').removeClass('selected');
+    $('.slideDiv').animate({
+      top: -$('.container').height() * $(this).index()
+    }, 450);
+  }
+  
+  /***Event Listeners***/
+  for ( var i = 0; i < button.length; i++ ) {
+    button[i].addEventListener('click', controls, false);
+  }
+  
+})();
+</script>
+</html>
